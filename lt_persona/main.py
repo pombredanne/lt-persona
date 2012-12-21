@@ -6,10 +6,15 @@ from datetime import datetime
 
 from clients import ClientHandler
 
+import os
+
 app = Flask(__name__)
 
 # set up database :
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.\
+    environ.get("PERSONA_DB_PATH",
+                'sqlite:////tmp/test.db')
+
 db = SQLAlchemy(app)
 
 
