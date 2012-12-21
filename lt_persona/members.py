@@ -6,6 +6,7 @@ import os
 DOMAIN = os.environ['LT_DOMAIN']
 ADMIN_EMAIL = os.environ['ADMIN_EMAIL']
 ADMIN_PASSWORD = os.environ['ADMIN_PASSWORD']
+MEMBERS_URI = 'http://data.%s/persons/members#%s'
 
 
 def get_members_from_google():
@@ -18,6 +19,7 @@ def get_members_from_google():
     client.ssl = True
     for user in client.RetrieveAllUsers().entry:
         users += [{
+            'uri': MEMBERS_URI % (DOMAIN, user.login.user_name),
             'app_id': user.id.text,
             'first_name': user.name.given_name,
             'last_name': user.name.family_name,
