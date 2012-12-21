@@ -5,6 +5,7 @@ from flask_rest import RESTResource
 from datetime import datetime
 
 from clients import ClientHandler
+from scheduler import start_scheduler
 
 import os
 
@@ -52,6 +53,7 @@ project_resource = RESTResource(
 
 app.register_blueprint(api)
 
+start_scheduler()
 
 @app.route("/members")
 def members():
