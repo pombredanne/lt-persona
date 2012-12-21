@@ -19,3 +19,16 @@ Ensuite pour lancer un serveur en local, il suffit de faire :
 ```
 python lt_persona/main.py
 ```
+
+Déployer
+-------------
+
+Il suffit d'installer les librairies nécessaires via les commandes ci-dessus, et de définir les variables d'environnements :
+```
+export PERSONA_DB_PATH=/opt/webapp/persona/clients.db
+export LT_DOMAIN="lateral-thoughts.com"
+export ADMIN_EMAIL=...
+export ADMIN_PASSWORD=...
+```
+
+pour définir où la persistence sera effectuée.
