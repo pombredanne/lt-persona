@@ -55,9 +55,16 @@ app.register_blueprint(api)
 
 @app.route("/members")
 def members():
-    from members import get_members_from_google
+    from members import get_members_from_google, format_members_to_rdf
+    import json
+    mimetype = request.headers['Accept']
     members = get_members_from_google()
-    return Response(members, mimetype='application/json')
+    if mimetype in ["application/n3", "application/turtle"]:
+        _, format = mimetype.split("/")
+        graph = format_members_to_rdf(members)
+        return Response(graph.serialize(format=format), mimetype=mimetype)
+    else:
+        return Response(json.dumps(members), mimetype='application/json')
 
 
 if __name__ == "__main__":
