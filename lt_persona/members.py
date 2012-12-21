@@ -1,5 +1,7 @@
 from flask import jsonify
+import json
 import os
+
 
 DOMAIN = os.environ['LT_DOMAIN']
 ADMIN_EMAIL = os.environ['ADMIN_EMAIL']
@@ -23,4 +25,4 @@ def get_members_from_google():
             'is_admin': user.login.admin,
             'email': "%s@%s" % (user.login.user_name, DOMAIN),
         }]
-    return jsonify(users)
+    return json.dumps(users)
